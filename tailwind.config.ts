@@ -61,7 +61,27 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				mountain: {
+					forest: 'hsl(var(--mountain-forest))',
+					'forest-light': 'hsl(var(--mountain-forest-light))', 
+					stone: 'hsl(var(--mountain-stone))',
+					'stone-dark': 'hsl(var(--mountain-stone-dark))',
+					sky: 'hsl(var(--mountain-sky))',
+					snow: 'hsl(var(--mountain-snow))',
+					earth: 'hsl(var(--mountain-earth))',
+					pine: 'hsl(var(--mountain-pine))'
 				}
+			},
+			backgroundImage: {
+				'gradient-forest': 'var(--gradient-forest)',
+				'gradient-sky': 'var(--gradient-sky)', 
+				'gradient-mountain': 'var(--gradient-mountain)',
+				'gradient-hero': 'var(--gradient-hero)'
+			},
+			boxShadow: {
+				'mountain': 'var(--shadow-mountain)',
+				'soft': 'var(--shadow-soft)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

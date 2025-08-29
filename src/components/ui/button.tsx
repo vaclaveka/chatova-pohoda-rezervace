@@ -18,11 +18,16 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Mountain cabin themed variants
+        hero: "bg-gradient-forest text-mountain-snow hover:bg-mountain-forest-light shadow-mountain transition-all duration-300 hover:shadow-lg hover:scale-105",
+        booking: "bg-mountain-sky text-mountain-snow hover:bg-mountain-sky/90 shadow-soft font-semibold text-lg py-6 px-8",
+        "outline-mountain": "border-2 border-mountain-forest text-mountain-forest hover:bg-mountain-forest hover:text-mountain-snow transition-all duration-300"
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
+        xl: "h-14 rounded-lg px-10 text-lg",
         icon: "h-10 w-10",
       },
     },
