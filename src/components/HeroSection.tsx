@@ -67,7 +67,7 @@ const HeroSection = () => {
               <Calendar className="h-6 w-6" />
               Zkontrolovat dostupnost
             </Button>
-            <Button variant="outline" size="xl" className="w-full md:w-auto border-mountain-snow text-mountain-snow hover:bg-mountain-snow hover:text-mountain-forest">
+            <Button variant="outline" size="xl" className="w-full md:w-auto border-mountain-snow bg-mountain-snow/20 text-white font-semibold hover:bg-mountain-snow hover:text-mountain-forest">
               Prohlédnout fotky
             </Button>
           </div>
