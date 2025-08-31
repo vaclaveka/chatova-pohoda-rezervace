@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -9,23 +9,44 @@ import {
   Info,
   Calendar as CalendarIcon 
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import ReservationForm from "./ReservationForm";
 
 const ReservationCalendar = () => {
   const [selectedDate, setSelectedDate] = useState<Date>();
-  
-  // Mock reserved dates - in real app this would come from backend
-  const reservedDates = [
-    new Date(2024, 11, 15), // December 15, 2024
-    new Date(2024, 11, 16), // December 16, 2024
-    new Date(2024, 11, 22), // December 22, 2024
-    new Date(2024, 11, 23), // December 23, 2024
-    new Date(2024, 11, 29), // December 29, 2024
-    new Date(2024, 11, 30), // December 30, 2024
-    new Date(2024, 11, 31), // December 31, 2024 (New Year)
-    new Date(2025, 0, 1),   // January 1, 2025
-    new Date(2025, 0, 18),  // January 18, 2025
-    new Date(2025, 0, 19),  // January 19, 2025
-  ];
+  const [reservedDates, setReservedDates] = useState<Date[]>([]);
+  const [showForm, setShowForm] = useState(false);
+  const { user, isAdmin } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchReservedDates();
+  }, []);
+
+  const fetchReservedDates = async () => {
+    try {
+      const { data } = await supabase
+        .from('reservations')
+        .select('check_in_date, check_out_date')
+        .eq('status', 'confirmed');
+
+      const dates: Date[] = [];
+      data?.forEach(reservation => {
+        const checkIn = new Date(reservation.check_in_date);
+        const checkOut = new Date(reservation.check_out_date);
+        
+        for (let d = new Date(checkIn); d < checkOut; d.setDate(d.getDate() + 1)) {
+          dates.push(new Date(d));
+        }
+      });
+
+      setReservedDates(dates);
+    } catch (error) {
+      console.error('Error fetching reserved dates:', error);
+    }
+  };
 
   const isDateReserved = (date: Date) => {
     return reservedDates.some(reservedDate => 
@@ -129,10 +150,27 @@ const ReservationCalendar = () => {
                       day: 'numeric'
                     })}
                   </p>
-                  <Button variant="booking" size="lg" className="w-full">
-                    <CalendarIcon className="h-5 w-5" />
-                    Rezervovat od tohoto data
-                  </Button>
+                  {user ? (
+                    <Button 
+                      variant="booking" 
+                      size="lg" 
+                      className="w-full"
+                      onClick={() => setShowForm(true)}
+                    >
+                      <CalendarIcon className="h-5 w-5" />
+                      Rezervovat od tohoto data
+                    </Button>
+                  ) : (
+                    <Button 
+                      variant="booking" 
+                      size="lg" 
+                      className="w-full"
+                      onClick={() => navigate('/auth')}
+                    >
+                      <CalendarIcon className="h-5 w-5" />
+                      Přihlásit se pro rezervaci
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             )}
@@ -184,8 +222,44 @@ const ReservationCalendar = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Admin Panel */}
+            {isAdmin && (
+              <Card className="bg-gradient-to-br from-secondary/5 to-accent/5">
+                <CardContent className="pt-6">
+                  <h3 className="font-semibold text-mountain-forest mb-3">
+                    Admin Panel
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Spravujte rezervace a zobrazte statistiky.
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full"
+                    onClick={() => navigate('/admin')}
+                  >
+                    Otevřít Admin Dashboard
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
+
+        {/* Reservation Form */}
+        {showForm && (
+          <div className="mt-8">
+            <ReservationForm 
+              selectedDate={selectedDate} 
+              onSuccess={() => {
+                setShowForm(false);
+                fetchReservedDates();
+                setSelectedDate(undefined);
+              }} 
+            />
+          </div>
+        )}
       </div>
     </section>
   );
