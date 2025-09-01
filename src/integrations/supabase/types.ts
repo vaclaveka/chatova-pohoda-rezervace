@@ -43,49 +43,31 @@ export type Database = {
       }
       reservations: {
         Row: {
-          check_in_date: string
-          check_out_date: string
-          created_at: string | null
-          guest_email: string
-          guest_name: string
-          guest_phone: string | null
+          created_at: string
+          date: string
+          guest_info: string | null
           id: string
-          number_of_guests: number
-          special_requests: string | null
+          period: string
           status: string
-          total_price: number | null
-          updated_at: string | null
-          user_id: string | null
+          updated_at: string
         }
         Insert: {
-          check_in_date: string
-          check_out_date: string
-          created_at?: string | null
-          guest_email: string
-          guest_name: string
-          guest_phone?: string | null
+          created_at?: string
+          date: string
+          guest_info?: string | null
           id?: string
-          number_of_guests?: number
-          special_requests?: string | null
+          period: string
           status?: string
-          total_price?: number | null
-          updated_at?: string | null
-          user_id?: string | null
+          updated_at?: string
         }
         Update: {
-          check_in_date?: string
-          check_out_date?: string
-          created_at?: string | null
-          guest_email?: string
-          guest_name?: string
-          guest_phone?: string | null
+          created_at?: string
+          date?: string
+          guest_info?: string | null
           id?: string
-          number_of_guests?: number
-          special_requests?: string | null
+          period?: string
           status?: string
-          total_price?: number | null
-          updated_at?: string | null
-          user_id?: string | null
+          updated_at?: string
         }
         Relationships: []
       }

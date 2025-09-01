@@ -1,265 +1,222 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Badge } from "@/components/ui/badge";
-import { 
-  CalendarCheck, 
-  CalendarX, 
-  Info,
-  Calendar as CalendarIcon 
-} from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import ReservationForm from "./ReservationForm";
+import React, { useEffect, useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { supabase } from '@/integrations/supabase/client';
+import { format } from 'date-fns';
+import { MessageCircle } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+
+interface DayAvailability {
+  am: 'available' | 'booked'; // Before 10:00
+  pm: 'available' | 'booked'; // After 15:00
+}
 
 const ReservationCalendar = () => {
-  const [selectedDate, setSelectedDate] = useState<Date>();
-  const [reservedDates, setReservedDates] = useState<Date[]>([]);
-  const [showForm, setShowForm] = useState(false);
-  const { user, isAdmin } = useAuth();
-  const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+  const [availability, setAvailability] = useState<Map<string, DayAvailability>>(new Map());
+  const { isAdmin } = useAuth();
 
-  useEffect(() => {
-    fetchReservedDates();
-  }, []);
-
-  const fetchReservedDates = async () => {
+  const fetchAvailability = async () => {
     try {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('reservations')
-        .select('check_in_date, check_out_date')
-        .eq('status', 'confirmed');
+        .select('date, period, status');
 
-      const dates: Date[] = [];
-      data?.forEach(reservation => {
-        const checkIn = new Date(reservation.check_in_date);
-        const checkOut = new Date(reservation.check_out_date);
+      if (error) throw error;
+
+      const availabilityMap = new Map<string, DayAvailability>();
+      
+      data?.forEach((reservation) => {
+        const dateStr = reservation.date;
+        if (!availabilityMap.has(dateStr)) {
+          availabilityMap.set(dateStr, { am: 'available', pm: 'available' });
+        }
         
-        for (let d = new Date(checkIn); d < checkOut; d.setDate(d.getDate() + 1)) {
-          dates.push(new Date(d));
+        const dayData = availabilityMap.get(dateStr)!;
+        if (reservation.period === 'full') {
+          dayData.am = reservation.status === 'booked' ? 'booked' : 'available';
+          dayData.pm = reservation.status === 'booked' ? 'booked' : 'available';
+        } else if (reservation.period === 'am' || reservation.period === 'pm') {
+          dayData[reservation.period as 'am' | 'pm'] = reservation.status === 'booked' ? 'booked' : 'available';
         }
       });
 
-      setReservedDates(dates);
+      setAvailability(availabilityMap);
     } catch (error) {
-      console.error('Error fetching reserved dates:', error);
+      console.error('Error fetching availability:', error);
     }
   };
 
-  const isDateReserved = (date: Date) => {
-    return reservedDates.some(reservedDate => 
-      date.getDate() === reservedDate.getDate() &&
-      date.getMonth() === reservedDate.getMonth() &&
-      date.getFullYear() === reservedDate.getFullYear()
-    );
+  useEffect(() => {
+    fetchAvailability();
+  }, []);
+
+  const getDayAvailability = (date: Date): DayAvailability => {
+    const dateStr = format(date, 'yyyy-MM-dd');
+    return availability.get(dateStr) || { am: 'available', pm: 'available' };
   };
 
-  const isDateAvailable = (date: Date) => {
+  const isDateSelectable = (date: Date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return date >= today && !isDateReserved(date);
+    return date >= today;
+  };
+
+  const openWhatsApp = () => {
+    const phone = '+420724216298';
+    const message = selectedDate 
+      ? `Dobrý den, chtěl(a) bych se zeptat na dostupnost chaty na ${format(selectedDate, 'dd.MM.yyyy')}.`
+      : 'Dobrý den, chtěl(a) bych se zeptat na dostupnost chaty.';
+    
+    const whatsappUrl = `https://wa.me/${phone.replace(/\+/g, '')}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
-    <section id="reservation-section" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-mountain-forest mb-4">
-            Rezervace a Dostupnost
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Zkontrolujte dostupné termíny a rezervujte si svůj pobyt v našem horském chaletu
+    <section id="reservation" className="py-16 px-4 bg-background">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold mb-4">Dostupnost a rezervace</h2>
+          <p className="text-muted-foreground">
+            Vyberte datum a kontaktujte nás přes WhatsApp
           </p>
         </div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Calendar */}
-          <div className="lg:col-span-2">
-            <Card className="shadow-soft">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-mountain-forest">
-                  <CalendarIcon className="h-6 w-6" />
-                  Kalendář dostupnosti
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Klikněte na dostupný datum pro začátek rezervace
-                </p>
-              </CardHeader>
-              <CardContent className="flex justify-center">
-                <Calendar
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={setSelectedDate}
-                  className="pointer-events-auto"
-                  disabled={(date) => !isDateAvailable(date)}
-                  modifiers={{
-                    reserved: reservedDates,
-                    available: (date) => isDateAvailable(date),
-                  }}
-                  modifiersClassNames={{
-                    reserved: "bg-destructive/20 text-destructive line-through",
-                    available: "bg-mountain-sky/20 text-mountain-sky hover:bg-mountain-sky hover:text-mountain-snow",
-                    selected: "bg-mountain-forest text-mountain-snow",
-                  }}
-                />
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Booking Info */}
-          <div className="space-y-6">
-            {/* Legend */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg text-mountain-forest">Legenda</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 bg-mountain-sky/20 border border-mountain-sky rounded"></div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Kalendář dostupnosti</CardTitle>
+              <CardDescription>
+                Půldenní dostupnost: ráno (do 10:00), odpoledne (od 15:00)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Calendar
+                mode="single"
+                selected={selectedDate}
+                onSelect={setSelectedDate}
+                disabled={(date) => !isDateSelectable(date)}
+                components={{
+                  Day: ({ date }) => {
+                    const dayAvailability = getDayAvailability(date);
+                    const isSelected = selectedDate && format(date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
+                    
+                    return (
+                      <button
+                        className={`relative w-9 h-9 text-sm rounded-sm transition-colors ${
+                          isSelected 
+                            ? 'bg-primary text-primary-foreground' 
+                            : 'hover:bg-accent hover:text-accent-foreground'
+                        }`}
+                        onClick={() => setSelectedDate(date)}
+                        disabled={!isDateSelectable(date)}
+                      >
+                        <span className="relative z-10">{format(date, 'd')}</span>
+                        {/* Morning availability indicator */}
+                        <div className={`absolute top-0 left-0 w-full h-1/2 rounded-t-sm ${
+                          dayAvailability.am === 'available' ? 'bg-green-200' : 'bg-red-200'
+                        } ${isSelected ? 'opacity-60' : 'opacity-80'}`} />
+                        {/* Afternoon availability indicator */}
+                        <div className={`absolute bottom-0 left-0 w-full h-1/2 rounded-b-sm ${
+                          dayAvailability.pm === 'available' ? 'bg-green-200' : 'bg-red-200'
+                        } ${isSelected ? 'opacity-60' : 'opacity-80'}`} />
+                      </button>
+                    );
+                  }
+                }}
+                className="rounded-md border w-full"
+              />
+              
+              <div className="mt-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-green-200 border border-green-300 rounded"></div>
                   <span className="text-sm">Dostupné</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 bg-destructive/20 border border-destructive rounded"></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 bg-red-200 border border-red-300 rounded"></div>
                   <span className="text-sm">Obsazené</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 bg-mountain-forest rounded"></div>
-                  <span className="text-sm">Vybrané</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-2 bg-green-200 border border-green-300"></div>
+                  <span className="text-sm">Ráno (do 10:00)</span>
                 </div>
-              </CardContent>
-            </Card>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-2 bg-red-200 border border-red-300"></div>
+                  <span className="text-sm">Odpoledne (od 15:00)</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Selected Date Info */}
-            {selectedDate && (
-              <Card className="border-mountain-sky/30 bg-mountain-sky/5">
-                <CardHeader>
-                  <CardTitle className="text-lg text-mountain-forest flex items-center gap-2">
-                    <CalendarCheck className="h-5 w-5" />
-                    Vybraný datum
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-lg font-semibold mb-4">
-                    {selectedDate.toLocaleDateString('cs-CZ', { 
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </p>
-                  {user ? (
-                    <Button 
-                      variant="booking" 
-                      size="lg" 
-                      className="w-full"
-                      onClick={() => setShowForm(true)}
-                    >
-                      <CalendarIcon className="h-5 w-5" />
-                      Rezervovat od tohoto data
-                    </Button>
-                  ) : (
-                    <Button 
-                      variant="booking" 
-                      size="lg" 
-                      className="w-full"
-                      onClick={() => navigate('/auth')}
-                    >
-                      <CalendarIcon className="h-5 w-5" />
-                      Přihlásit se pro rezervaci
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Quick Info */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg text-mountain-forest flex items-center gap-2">
-                  <Info className="h-5 w-5" />
-                  Rezervační podmínky
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm text-muted-foreground">
-                <div className="flex items-start gap-2">
-                  <Badge variant="secondary" className="mt-0.5">Min</Badge>
-                  <span>Minimální pobyt 2 noci o víkendu, 7 nocí v hlavní sezóně</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Badge variant="secondary" className="mt-0.5">Záloha</Badge>
-                  <span>50% při rezervaci, zbytek při příjezdu</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Badge variant="secondary" className="mt-0.5">Kauce</Badge>
-                  <span>5.000 Kč (vrácena po kontrole objektu)</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Badge variant="secondary" className="mt-0.5">Storno</Badge>
-                  <span>Zdarma do 14 dní před příjezdem</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Contact Card */}
-            <Card className="bg-gradient-to-br from-mountain-forest/5 to-mountain-sky/5">
-              <CardContent className="pt-6">
-                <h3 className="font-semibold text-mountain-forest mb-3">
-                  Potřebujete poradit s rezervací?
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Rádi vám pomůžeme s výběrem termínu a zodpovíme všechny vaše otázky.
-                </p>
-                <div className="space-y-2">
-                  <Button variant="outline-mountain" size="sm" className="w-full">
-                    📞 Zavolejte nám
-                  </Button>
-                  <Button variant="ghost" size="sm" className="w-full">
-                    ✉️ Napište email
+          <Card>
+            <CardHeader>
+              <CardTitle>Rezervace přes WhatsApp</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {selectedDate ? (
+                <div className="space-y-4">
+                  <p><strong>Vybrané datum:</strong> {format(selectedDate, 'dd.MM.yyyy')}</p>
+                  <div className="space-y-2">
+                    <p><strong>Dostupnost:</strong></p>
+                    <div className="pl-4 space-y-1">
+                      <p>Ráno (do 10:00): <span className={`font-medium ${getDayAvailability(selectedDate).am === 'available' ? 'text-green-600' : 'text-red-600'}`}>
+                        {getDayAvailability(selectedDate).am === 'available' ? 'Dostupné' : 'Obsazené'}
+                      </span></p>
+                      <p>Odpoledne (od 15:00): <span className={`font-medium ${getDayAvailability(selectedDate).pm === 'available' ? 'text-green-600' : 'text-red-600'}`}>
+                        {getDayAvailability(selectedDate).pm === 'available' ? 'Dostupné' : 'Obsazené'}
+                      </span></p>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    onClick={openWhatsApp}
+                    className="w-full gap-2"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    Rezervovat přes WhatsApp
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Admin Panel */}
-            {isAdmin && (
-              <Card className="bg-gradient-to-br from-secondary/5 to-accent/5">
-                <CardContent className="pt-6">
-                  <h3 className="font-semibold text-mountain-forest mb-3">
-                    Admin Panel
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Spravujte rezervace a zobrazte statistiky.
+              ) : (
+                <div className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Vyberte datum v kalendáři nebo nás kontaktujte přímo.
                   </p>
                   <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="w-full"
-                    onClick={() => navigate('/admin')}
+                    onClick={openWhatsApp}
+                    className="w-full gap-2"
                   >
-                    Otevřít Admin Dashboard
+                    <MessageCircle className="w-4 h-4" />
+                    Kontaktovat přes WhatsApp
                   </Button>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </div>
+                </div>
+              )}
+              
+              <div className="mt-6 p-4 bg-muted rounded-lg">
+                <h4 className="font-semibold mb-2">Informace</h4>
+                <ul className="text-sm space-y-1">
+                  <li>• Check-in: od 15:00</li>
+                  <li>• Check-out: do 10:00</li>
+                  <li>• Cena: 150€/noc</li>
+                  <li>• Maximální kapacita: 8 osob</li>
+                  <li>• Rezervace pouze přes WhatsApp</li>
+                </ul>
+              </div>
 
-        {/* Reservation Form */}
-        {showForm && (
-          <div className="mt-8">
-            <ReservationForm 
-              selectedDate={selectedDate} 
-              onSuccess={() => {
-                setShowForm(false);
-                fetchReservedDates();
-                setSelectedDate(undefined);
-              }} 
-            />
-          </div>
-        )}
+              {isAdmin && (
+                <div className="mt-6">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => window.location.href = '/admin'}
+                    className="w-full"
+                  >
+                    Admin Panel
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </section>
   );

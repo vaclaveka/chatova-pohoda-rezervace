@@ -26,24 +26,24 @@ const CabinHeader = () => {
             {user ? (
               <div className="flex items-center gap-2">
                 <span className="text-sm hidden md:inline">
-                  {user.email}
+                  Admin: {user.email}
                 </span>
                 <Button variant="outline" size="sm" onClick={signOut}>
                   Odhlásit
                 </Button>
               </div>
             ) : (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => navigate('/auth')}
-              >
-                <User className="h-4 w-4" />
-                Přihlásit se
-              </Button>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => navigate('/auth')}
+            >
+              <User className="h-4 w-4" />
+              Admin přihlášení
+            </Button>
             )}
             <Button variant="booking" size="sm" onClick={() => {
-              const reservationSection = document.getElementById('reservation-section');
+              const reservationSection = document.getElementById('reservation');
               reservationSection?.scrollIntoView({ behavior: 'smooth' });
             }}>
               <Calendar className="h-4 w-4" />

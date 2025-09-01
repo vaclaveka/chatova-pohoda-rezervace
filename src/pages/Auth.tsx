@@ -8,13 +8,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { signIn, signUp, user } = useAuth();
+  const { signIn, user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -29,29 +27,20 @@ const Auth = () => {
     setLoading(true);
 
     try {
-      let result;
-      if (isLogin) {
-        result = await signIn(email, password);
-      } else {
-        result = await signUp(email, password, fullName);
-      }
+      const result = await signIn(email, password);
 
       if (result.error) {
-        toast({
-          title: 'Error',
-          description: result.error.message,
-          variant: 'destructive',
-        });
-      } else if (!isLogin) {
-        toast({
-          title: 'Success',
-          description: 'Account created! Please check your email to verify your account.',
-        });
+        throw result.error;
       }
-    } catch (error) {
+
       toast({
-        title: 'Error',
-        description: 'An unexpected error occurred',
+        title: 'Úspěch!',
+        description: 'Byli jste úspěšně přihlášeni.',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Chyba',
+        description: error.message || 'Neplatné přihlašovací údaje.',
         variant: 'destructive',
       });
     } finally {
@@ -60,30 +49,18 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>{isLogin ? 'Sign In' : 'Sign Up'}</CardTitle>
+          <CardTitle>Administrátorské přihlášení</CardTitle>
           <CardDescription>
-            {isLogin ? 'Sign in to your account' : 'Create a new account'}
+            Pouze pro správce chaty
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {!isLogin && (
-              <div className="space-y-2">
-                <Label htmlFor="fullName">Full Name</Label>
-                <Input
-                  id="fullName"
-                  type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  required
-                />
-              </div>
-            )}
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Admin Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -93,7 +70,7 @@ const Auth = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Heslo</Label>
               <Input
                 id="password"
                 type="password"
@@ -103,20 +80,11 @@ const Auth = () => {
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Loading...' : (isLogin ? 'Sign In' : 'Sign Up')}
+              {loading ? 'Přihlašuji...' : 'Přihlásit se'}
             </Button>
           </form>
-          <div className="mt-4 text-center">
-            <Button
-              variant="link"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-sm"
-            >
-              {isLogin 
-                ? "Don't have an account? Sign up" 
-                : 'Already have an account? Sign in'
-              }
-            </Button>
+          <div className="mt-4 text-center text-sm text-muted-foreground">
+            Pouze pro administrátory chaty
           </div>
         </CardContent>
       </Card>
