@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Phone, Calendar, MapPin } from "lucide-react";
+import { Phone, Calendar, MapPin, User } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const CabinHeader = () => {
   const { user, signOut } = useAuth();
@@ -21,7 +23,29 @@ const CabinHeader = () => {
               <Phone className="h-4 w-4" />
               Kontakt
             </Button>
-            <Button variant="booking" size="sm">
+            {user ? (
+              <div className="flex items-center gap-2">
+                <span className="text-sm hidden md:inline">
+                  {user.email}
+                </span>
+                <Button variant="outline" size="sm" onClick={signOut}>
+                  Odhlásit
+                </Button>
+              </div>
+            ) : (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => navigate('/auth')}
+              >
+                <User className="h-4 w-4" />
+                Přihlásit se
+              </Button>
+            )}
+            <Button variant="booking" size="sm" onClick={() => {
+              const reservationSection = document.getElementById('reservation-section');
+              reservationSection?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               <Calendar className="h-4 w-4" />
               Rezervovat
             </Button>
