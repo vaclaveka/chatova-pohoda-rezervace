@@ -1,101 +1,71 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  MapPin, 
-  Car, 
-  Train, 
-  Mountain, 
-  Waves, 
-  TreePine,
-  Utensils,
-  ShoppingCart,
-  Clock,
-  Navigation
-} from "lucide-react";
-
+import { MapPin, Car, Train, Mountain, Waves, TreePine, Utensils, ShoppingCart, Clock, Navigation } from "lucide-react";
 const LocationSection = () => {
-  const nearbyAttractions = [
-    {
-      name: "Ski areál Přemyslov",
-      distance: "5 km",
-      type: "Lyžování",
-      icon: <Mountain className="h-5 w-5" />,
-      description: "Rodinný ski areál s umělým zasněžováním"
-    },
-    {
-      name: "Ski areál Branná", 
-      distance: "8 km",
-      type: "Lyžování",
-      icon: <Mountain className="h-5 w-5" />,
-      description: "Větší ski areál s různými trasami"
-    },
-    {
-      name: "Termální lázně Velké Losiny",
-      distance: "12 km", 
-      type: "Wellness",
-      icon: <Waves className="h-5 w-5" />,
-      description: "Léčebné termální prameny a wellness"
-    },
-    {
-      name: "Jesenický hřeben",
-      distance: "15 km",
-      type: "Turistika",
-      icon: <TreePine className="h-5 w-5" />,
-      description: "Nejkrásnější turistické trasy Jeseníků"
-    }
-  ];
-
-  const nearbyServices = [
-    {
-      name: "Penzion Trojkámen",
-      distance: "200 m",
-      type: "Restaurace",
-      icon: <Utensils className="h-5 w-5" />
-    },
-    {
-      name: "X-Park Františkov", 
-      distance: "2 km",
-      type: "Restaurace",
-      icon: <Utensils className="h-5 w-5" />
-    },
-    {
-      name: "Jednota Coop",
-      distance: "700 m", 
-      type: "Obchod",
-      icon: <ShoppingCart className="h-5 w-5" />
-    },
-    {
-      name: "Penny Market Hanušovice",
-      distance: "8 km",
-      type: "Supermarket",
-      icon: <ShoppingCart className="h-5 w-5" />
-    }
-  ];
-
-  const transportOptions = [
-    {
-      type: "Vlakem",
-      icon: <Train className="h-6 w-6" />,
-      description: "Železniční zastávka 200 m od chaty",
-      details: "Přímé spojení z Olomouce, Šumperka"
-    },
-    {
-      type: "Autobusem", 
-      icon: <Car className="h-6 w-6" />,
-      description: "Autobusová zastávka 200 m od chaty",
-      details: "Regionální linky do okolních měst"
-    },
-    {
-      type: "Autem",
-      icon: <Car className="h-6 w-6" />, 
-      description: "Oplocené parkování u chaty",
-      details: "2,5 hod z Prahy, 1,5 hod z Brna"
-    }
-  ];
-
-  return (
-    <section className="py-20 bg-gradient-to-b from-background to-muted/30">
+  const nearbyAttractions = [{
+    name: "Ski areál Přemyslov",
+    distance: "5 km",
+    type: "Lyžování",
+    icon: <Mountain className="h-5 w-5" />,
+    description: "Rodinný ski areál s umělým zasněžováním"
+  }, {
+    name: "Ski areál Branná",
+    distance: "8 km",
+    type: "Lyžování",
+    icon: <Mountain className="h-5 w-5" />,
+    description: "Větší ski areál s různými trasami"
+  }, {
+    name: "Termální lázně Velké Losiny",
+    distance: "12 km",
+    type: "Wellness",
+    icon: <Waves className="h-5 w-5" />,
+    description: "Léčebné termální prameny a wellness"
+  }, {
+    name: "Jesenický hřeben",
+    distance: "15 km",
+    type: "Turistika",
+    icon: <TreePine className="h-5 w-5" />,
+    description: "Nejkrásnější turistické trasy Jeseníků"
+  }];
+  const nearbyServices = [{
+    name: "Penzion Trojkámen",
+    distance: "200 m",
+    type: "Restaurace",
+    icon: <Utensils className="h-5 w-5" />
+  }, {
+    name: "X-Park Františkov",
+    distance: "2 km",
+    type: "Restaurace",
+    icon: <Utensils className="h-5 w-5" />
+  }, {
+    name: "Jednota Coop",
+    distance: "700 m",
+    type: "Obchod",
+    icon: <ShoppingCart className="h-5 w-5" />
+  }, {
+    name: "Penny Market Hanušovice",
+    distance: "8 km",
+    type: "Supermarket",
+    icon: <ShoppingCart className="h-5 w-5" />
+  }];
+  const transportOptions = [{
+    type: "Vlakem",
+    icon: <Train className="h-6 w-6" />,
+    description: "Železniční zastávka 200 m od chaty",
+    details: "Přímé spojení z Olomouce, Šumperka"
+  }, {
+    type: "Autobusem",
+    icon: <Car className="h-6 w-6" />,
+    description: "Autobusová zastávka 200 m od chaty",
+    details: "Regionální linky do okolních měst"
+  }, {
+    type: "Autem",
+    icon: <Car className="h-6 w-6" />,
+    description: "Oplocené parkování u chaty",
+    details: "2,5 hod z Prahy, 1,5 hod z Brna"
+  }];
+  return <section className="py-20 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -122,7 +92,7 @@ const LocationSection = () => {
                   {/* Map placeholder - in real implementation, use Google Maps */}
                   <div className="text-center text-mountain-snow p-8">
                     <MapPin className="h-16 w-16 mx-auto mb-4 opacity-80" />
-                    <h3 className="text-xl font-semibold mb-2">Chata Jindřichov</h3>
+                    <h3 className="text-xl font-semibold mb-2">Chata Losík</h3>
                     <p className="mb-4 opacity-90">Nové Losiny, Jeseníky</p>
                     <Button variant="hero" size="lg">
                       <Navigation className="h-5 w-5" />
@@ -168,16 +138,14 @@ const LocationSection = () => {
                 <CardTitle className="text-xl text-mountain-forest">Doprava</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {transportOptions.map((transport, index) => (
-                  <div key={index} className="flex items-start gap-4 p-3 bg-muted/50 rounded-lg">
+                {transportOptions.map((transport, index) => <div key={index} className="flex items-start gap-4 p-3 bg-muted/50 rounded-lg">
                     <div className="text-mountain-forest">{transport.icon}</div>
                     <div className="flex-1">
                       <h4 className="font-semibold text-mountain-forest">{transport.type}</h4>
                       <p className="text-sm text-muted-foreground mb-1">{transport.description}</p>
                       <p className="text-xs text-muted-foreground">{transport.details}</p>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </CardContent>
             </Card>
 
@@ -188,19 +156,28 @@ const LocationSection = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { name: "Hanušovice", distance: "8 km" },
-                    { name: "Velké Losiny", distance: "12 km" },
-                    { name: "Branná", distance: "8 km" },
-                    { name: "Staré Město", distance: "15 km" },
-                    { name: "Jeseník", distance: "25 km" },
-                    { name: "Šumperk", distance: "30 km" }
-                  ].map((city, index) => (
-                    <div key={index} className="flex justify-between items-center p-2 bg-muted/30 rounded">
+                  {[{
+                  name: "Hanušovice",
+                  distance: "8 km"
+                }, {
+                  name: "Velké Losiny",
+                  distance: "12 km"
+                }, {
+                  name: "Branná",
+                  distance: "8 km"
+                }, {
+                  name: "Staré Město",
+                  distance: "15 km"
+                }, {
+                  name: "Jeseník",
+                  distance: "25 km"
+                }, {
+                  name: "Šumperk",
+                  distance: "30 km"
+                }].map((city, index) => <div key={index} className="flex justify-between items-center p-2 bg-muted/30 rounded">
                       <span className="text-sm">{city.name}</span>
                       <Badge variant="secondary" className="text-xs">{city.distance}</Badge>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </CardContent>
             </Card>
@@ -215,8 +192,7 @@ const LocationSection = () => {
               <CardTitle className="text-xl text-mountain-forest">Okolní atrakce</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {nearbyAttractions.map((attraction, index) => (
-                <div key={index} className="flex items-start gap-4 p-4 bg-gradient-to-r from-mountain-sky/5 to-transparent rounded-lg border border-mountain-sky/20">
+              {nearbyAttractions.map((attraction, index) => <div key={index} className="flex items-start gap-4 p-4 bg-gradient-to-r from-mountain-sky/5 to-transparent rounded-lg border border-mountain-sky/20">
                   <div className="text-mountain-sky">{attraction.icon}</div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
@@ -226,8 +202,7 @@ const LocationSection = () => {
                     <p className="text-sm text-muted-foreground mb-1">{attraction.description}</p>
                     <Badge variant="secondary" className="text-xs">{attraction.type}</Badge>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </CardContent>
           </Card>
 
@@ -237,8 +212,7 @@ const LocationSection = () => {
               <CardTitle className="text-xl text-mountain-forest">Služby v okolí</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {nearbyServices.map((service, index) => (
-                <div key={index} className="flex items-center gap-4 p-4 bg-gradient-to-r from-mountain-forest/5 to-transparent rounded-lg border border-mountain-forest/20">
+              {nearbyServices.map((service, index) => <div key={index} className="flex items-center gap-4 p-4 bg-gradient-to-r from-mountain-forest/5 to-transparent rounded-lg border border-mountain-forest/20">
                   <div className="text-mountain-forest">{service.icon}</div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
@@ -247,14 +221,11 @@ const LocationSection = () => {
                     </div>
                     <p className="text-sm text-muted-foreground">{service.type}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </CardContent>
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default LocationSection;
