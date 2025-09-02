@@ -87,7 +87,7 @@ const AmenitiesSection = () => {
         </div>
 
         {/* Image Gallery with Details */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
           {/* Interior */}
           <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
@@ -98,13 +98,8 @@ const AmenitiesSection = () => {
               />
             </div>
             <CardHeader>
-              <CardTitle className="text-mountain-forest">Společenská místnost</CardTitle>
+              <CardTitle className="text-mountain-forest text-base">Společenská místnost</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Prostorná společenská místnost s plně vybavenou kuchyní, kachlovými kamny a posezením
-              </p>
-            </CardContent>
           </Card>
 
           {/* Bedroom */}
@@ -117,13 +112,8 @@ const AmenitiesSection = () => {
               />
             </div>
             <CardHeader>
-              <CardTitle className="text-mountain-forest">Pokoje</CardTitle>
+              <CardTitle className="text-mountain-forest text-base">Pokoje</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                5 čtyřlůžkových pokojů s TV, jeden s dětskou postýlkou, ložní prádlo včetně
-              </p>
-            </CardContent>
           </Card>
 
           {/* Outdoor */}
@@ -136,13 +126,61 @@ const AmenitiesSection = () => {
               />
             </div>
             <CardHeader>
-              <CardTitle className="text-mountain-forest">Venkovní areál</CardTitle>
+              <CardTitle className="text-mountain-forest text-base">Venkovní areál</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Krytá terasa, trampolína, houpačky, pískoviště, ping pong, bazén a ohniště
-              </p>
-            </CardContent>
+          </Card>
+
+          {/* Additional Images */}
+          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
+            <div className="aspect-video relative overflow-hidden">
+              <img 
+                src="/07.JPG" 
+                alt="Pohled na chatu" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <CardHeader>
+              <CardTitle className="text-mountain-forest text-base">Exteriér</CardTitle>
+            </CardHeader>
+          </Card>
+
+          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
+            <div className="aspect-video relative overflow-hidden">
+              <img 
+                src="/19.jpg" 
+                alt="Vnitřní prostory" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <CardHeader>
+              <CardTitle className="text-mountain-forest text-base">Interiér</CardTitle>
+            </CardHeader>
+          </Card>
+
+          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
+            <div className="aspect-video relative overflow-hidden">
+              <img 
+                src="/3.jpg" 
+                alt="Pohled na objekt" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <CardHeader>
+              <CardTitle className="text-mountain-forest text-base">Chata</CardTitle>
+            </CardHeader>
+          </Card>
+
+          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
+            <div className="aspect-video relative overflow-hidden">
+              <img 
+                src="/IMG_20191013_151234.jpg" 
+                alt="Venkovní prostředí" 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <CardHeader>
+              <CardTitle className="text-mountain-forest text-base">Okolí chaty</CardTitle>
+            </CardHeader>
           </Card>
         </div>
 
