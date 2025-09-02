@@ -21,14 +21,14 @@ const Footer = () => {
   const nearbyPlaces = ["Ski areál Přemyslov", "Ski areál Branná", "Termální lázně Velké Losiny", "Jesenický hřeben", "Hanušovice", "Šumperk"];
   return <footer className="bg-gradient-to-b from-mountain-forest to-mountain-pine text-mountain-snow">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand & Description */}
-          <div className="lg:col-span-1">
+          <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <Mountain className="h-8 w-8" />
-              <h3 className="text-2xl font-bold">Chata Losík</h3>
+              <Mountain className="h-6 w-6 sm:h-8 sm:w-8" />
+              <h3 className="text-xl sm:text-2xl font-bold">Chata Losík</h3>
             </div>
-            <p className="text-mountain-snow/80 mb-6 leading-relaxed">
+            <p className="text-mountain-snow/80 mb-6 leading-relaxed text-sm sm:text-base">
               Stylový horský chalet v klidném prostředí Jeseníků. 
               Ideální pro rodinné dovolené, firemní akce a přátelské pobyty.
             </p>
@@ -47,9 +47,18 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            
+            <h4 className="text-lg font-semibold mb-6">Rychlé odkazy</h4>
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => {})}
+              {quickLinks.map((link, index) => (
+                <li key={index}>
+                  <a 
+                    href={link.href} 
+                    className="text-mountain-snow/80 hover:text-mountain-snow transition-colors text-sm"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -68,8 +77,8 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-6">Kontakt</h4>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 mt-0.5 text-mountain-snow/60" />
-                <div className="text-sm text-mountain-snow/80">
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 mt-0.5 text-mountain-snow/60" />
+                <div className="text-xs sm:text-sm text-mountain-snow/80">
                   <p>Nové Losiny</p>
                   <p>788 25 Jindřichov</p>
                   <p>Jeseníky</p>
@@ -77,22 +86,22 @@ const Footer = () => {
               </div>
               
               <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-mountain-snow/60" />
-                <a href="tel:+420123456789" className="text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">
+                <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-mountain-snow/60" />
+                <a href="tel:+420123456789" className="text-xs sm:text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">
                   +420 123 456 789
                 </a>
               </div>
               
               <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-mountain-snow/60" />
-                <a href="mailto:rezervace@chatajindrichov.cz" className="text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-mountain-snow/60" />
+                <a href="mailto:rezervace@chatajindrichov.cz" className="text-xs sm:text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">
                   rezervace@chatajindrichov.cz
                 </a>
               </div>
               
               <div className="flex items-start gap-3">
-                <Clock className="h-5 w-5 mt-0.5 text-mountain-snow/60" />
-                <div className="text-sm text-mountain-snow/80">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 mt-0.5 text-mountain-snow/60" />
+                <div className="text-xs sm:text-sm text-mountain-snow/80">
                   <p>Check-in: 15:00</p>
                   <p>Check-out: 10:00</p>
                 </div>
@@ -103,12 +112,20 @@ const Footer = () => {
 
         {/* Booking CTA */}
         <Card className="mt-12 bg-mountain-snow/10 backdrop-blur-sm border-mountain-snow/20">
-          <div className="p-8 text-center">
-            <h3 className="text-2xl font-bold mb-3">Připraveni na horskou dovolenou?</h3>
-            <p className="text-mountain-snow/80 mb-6 max-w-2xl mx-auto">
+          <div className="p-6 sm:p-8 text-center">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3">Připraveni na horskou dovolenou?</h3>
+            <p className="text-mountain-snow/80 mb-6 max-w-2xl mx-auto text-sm sm:text-base">
               Rezervujte si pobyt v našem chaletu a užijte si krásy Jeseníků v každém ročním období
             </p>
-            <Button variant="hero" size="xl" className="bg-mountain-snow text-mountain-forest hover:bg-mountain-snow/90">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="bg-mountain-snow text-mountain-forest hover:bg-mountain-snow/90 w-full sm:w-auto"
+              onClick={() => {
+                const reservationSection = document.getElementById('reservation');
+                reservationSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               Rezervovat nyní
             </Button>
           </div>
