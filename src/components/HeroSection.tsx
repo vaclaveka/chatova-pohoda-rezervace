@@ -14,7 +14,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-mountain-forest/80 via-transparent to-mountain-earth/60 sm:hidden" />
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-hero" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-mountain-forest/70" />
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20">
