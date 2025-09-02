@@ -41,6 +41,27 @@ const AdminDashboard = () => {
       return;
     }
     fetchReservations();
+
+    // Set up realtime subscription
+    const channel = supabase
+      .channel('reservations-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'reservations'
+        },
+        (payload) => {
+          console.log('Reservations updated:', payload);
+          fetchReservations();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [isAdmin, navigate]);
 
   const fetchReservations = async () => {

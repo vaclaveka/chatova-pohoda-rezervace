@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const CabinHeader = () => {
-  const { user, signOut } = useAuth();
+  const { user, isAdmin, signOut } = useAuth();
   const navigate = useNavigate();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -25,6 +25,11 @@ const CabinHeader = () => {
             </Button>
             {user ? (
               <div className="flex items-center gap-2">
+                {isAdmin && (
+                  <Button variant="outline" size="sm" onClick={() => navigate('/admin')}>
+                    Admin Panel
+                  </Button>
+                )}
                 <span className="text-sm hidden md:inline">
                   Admin: {user.email}
                 </span>

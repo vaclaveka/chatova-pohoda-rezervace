@@ -50,6 +50,27 @@ const ReservationCalendar = () => {
 
   useEffect(() => {
     fetchAvailability();
+
+    // Set up realtime subscription
+    const channel = supabase
+      .channel('reservations-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'reservations'
+        },
+        (payload) => {
+          console.log('Reservations updated:', payload);
+          fetchAvailability();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const getDayAvailability = (date: Date): DayAvailability => {
