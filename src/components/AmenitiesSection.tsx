@@ -87,101 +87,67 @@ const AmenitiesSection = () => {
         </div>
 
         {/* Image Gallery with Details */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-          {/* Interior */}
-          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src="/interior-common.jpg" 
-                alt="Interiér společenské místnosti s kuchyní" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="text-mountain-forest text-base">Společenská místnost</CardTitle>
-            </CardHeader>
-          </Card>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {/* Clickable Images */}
+          <a href="/07.JPG" target="_blank" rel="noopener noreferrer" className="block">
+            <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
+              <div className="aspect-video relative overflow-hidden">
+                <img 
+                  src="/07.JPG" 
+                  alt="Pohled na chatu" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-mountain-forest text-base">Exteriér</CardTitle>
+              </CardHeader>
+            </Card>
+          </a>
 
-          {/* Bedroom */}
-          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src="/bedroom.jpg" 
-                alt="Pokoj s lůžky a TV" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="text-mountain-forest text-base">Pokoje</CardTitle>
-            </CardHeader>
-          </Card>
+          <a href="/19.jpg" target="_blank" rel="noopener noreferrer" className="block">
+            <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
+              <div className="aspect-video relative overflow-hidden">
+                <img 
+                  src="/19.jpg" 
+                  alt="Vnitřní prostory" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-mountain-forest text-base">Interiér</CardTitle>
+              </CardHeader>
+            </Card>
+          </a>
 
-          {/* Outdoor */}
-          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src="/outdoor-facilities.jpg" 
-                alt="Venkovní zázemí s hracími prvky" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="text-mountain-forest text-base">Venkovní areál</CardTitle>
-            </CardHeader>
-          </Card>
+          <a href="/3.jpg" target="_blank" rel="noopener noreferrer" className="block">
+            <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
+              <div className="aspect-video relative overflow-hidden">
+                <img 
+                  src="/3.jpg" 
+                  alt="Pohled na objekt" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-mountain-forest text-base">Chata</CardTitle>
+              </CardHeader>
+            </Card>
+          </a>
 
-          {/* Additional Images */}
-          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src="/07.JPG" 
-                alt="Pohled na chatu" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="text-mountain-forest text-base">Exteriér</CardTitle>
-            </CardHeader>
-          </Card>
-
-          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src="/19.jpg" 
-                alt="Vnitřní prostory" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="text-mountain-forest text-base">Interiér</CardTitle>
-            </CardHeader>
-          </Card>
-
-          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src="/3.jpg" 
-                alt="Pohled na objekt" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="text-mountain-forest text-base">Chata</CardTitle>
-            </CardHeader>
-          </Card>
-
-          <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
-            <div className="aspect-video relative overflow-hidden">
-              <img 
-                src="/IMG_20191013_151234.jpg" 
-                alt="Venkovní prostředí" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
-            <CardHeader>
-              <CardTitle className="text-mountain-forest text-base">Okolí chaty</CardTitle>
-            </CardHeader>
-          </Card>
+          <a href="/IMG_20191013_151234.jpg" target="_blank" rel="noopener noreferrer" className="block">
+            <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
+              <div className="aspect-video relative overflow-hidden">
+                <img 
+                  src="/IMG_20191013_151234.jpg" 
+                  alt="Venkovní prostředí" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-mountain-forest text-base">Okolí chaty</CardTitle>
+              </CardHeader>
+            </Card>
+          </a>
         </div>
 
         {/* Additional Amenities */}
