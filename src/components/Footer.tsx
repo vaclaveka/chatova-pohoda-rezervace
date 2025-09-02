@@ -49,16 +49,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Rychlé odkazy</h4>
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href} 
-                    className="text-mountain-snow/80 hover:text-mountain-snow transition-colors text-sm"
-                  >
+              {quickLinks.map((link, index) => <li key={index}>
+                  <a href={link.href} className="text-mountain-snow/80 hover:text-mountain-snow transition-colors text-sm">
                     {link.label}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
@@ -87,16 +82,12 @@ const Footer = () => {
               
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-mountain-snow/60" />
-                <a href="tel:+420123456789" className="text-xs sm:text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">
-                  +420 123 456 789
-                </a>
+                <a href="tel:+420123456789" className="text-xs sm:text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">+420 724 216 298</a>
               </div>
               
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-mountain-snow/60" />
-                <a href="mailto:rezervace@chatajindrichov.cz" className="text-xs sm:text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">
-                  rezervace@chatajindrichov.cz
-                </a>
+                <a href="mailto:rezervace@chatajindrichov.cz" className="text-xs sm:text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">chatalosik@seznam.cz</a>
               </div>
               
               <div className="flex items-start gap-3">
@@ -117,15 +108,12 @@ const Footer = () => {
             <p className="text-mountain-snow/80 mb-6 max-w-2xl mx-auto text-sm sm:text-base">
               Rezervujte si pobyt v našem chaletu a užijte si krásy Jeseníků v každém ročním období
             </p>
-            <Button 
-              variant="hero" 
-              size="lg" 
-              className="bg-mountain-snow text-mountain-forest hover:bg-mountain-snow/90 w-full sm:w-auto"
-              onClick={() => {
-                const reservationSection = document.getElementById('reservation');
-                reservationSection?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
+            <Button variant="hero" size="lg" className="bg-mountain-snow text-mountain-forest hover:bg-mountain-snow/90 w-full sm:w-auto" onClick={() => {
+            const reservationSection = document.getElementById('reservation');
+            reservationSection?.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }}>
               Rezervovat nyní
             </Button>
           </div>
