@@ -3,7 +3,7 @@ import { Calendar, Users, Star, MapPin, ChevronDown } from "lucide-react";
 const HeroSection = () => {
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      <div className="absolute inset-0 bg-contain sm:bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url(/3.jpg)`
     }} />
       
