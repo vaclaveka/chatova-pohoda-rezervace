@@ -13,9 +13,10 @@ import {
   Waves,
   Baby
 } from "lucide-react";
-import interiorImage from "@/assets/interior-common.jpg";
-import bedroomImage from "@/assets/bedroom.jpg";
-import outdoorImage from "@/assets/outdoor-facilities.jpg";
+// Images temporarily disabled - add your own images here
+// import interiorImage from "@/assets/interior-common.jpg";
+// import bedroomImage from "@/assets/bedroom.jpg";
+// import outdoorImage from "@/assets/outdoor-facilities.jpg";
 
 const AmenitiesSection = () => {
   const mainFeatures = [
@@ -95,7 +96,7 @@ const AmenitiesSection = () => {
           <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <img 
-                src={interiorImage} 
+                src="/placeholder.svg" 
                 alt="Interiér společenské místnosti s kuchyní" 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
@@ -114,7 +115,7 @@ const AmenitiesSection = () => {
           <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <img 
-                src={bedroomImage} 
+                src="/placeholder.svg" 
                 alt="Pokoj s lůžky a TV" 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
@@ -133,7 +134,7 @@ const AmenitiesSection = () => {
           <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <img 
-                src={outdoorImage} 
+                src="/placeholder.svg" 
                 alt="Venkovní zázemí s hracími prvky" 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
