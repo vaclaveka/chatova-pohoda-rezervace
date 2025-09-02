@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Users, Star, MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-cabin.jpg";
+// Hero image temporarily disabled - add your own image here
+// import heroImage from "@/assets/hero-cabin.jpg";
 
 const HeroSection = () => {
   return (
@@ -8,7 +9,7 @@ const HeroSection = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(/placeholder.svg)` }}
       />
       
       {/* Overlay */}
