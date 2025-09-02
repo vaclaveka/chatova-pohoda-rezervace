@@ -26,7 +26,7 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Mountain className="h-8 w-8" />
-              <h3 className="text-2xl font-bold">Chata Jindřichov</h3>
+              <h3 className="text-2xl font-bold">Chata Losík</h3>
             </div>
             <p className="text-mountain-snow/80 mb-6 leading-relaxed">
               Stylový horský chalet v klidném prostředí Jeseníků. 
@@ -47,13 +47,9 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Rychlé odkazy</h4>
+            
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => <li key={index}>
-                  <a href={link.href} className="text-mountain-snow/80 hover:text-mountain-snow transition-colors duration-200 text-sm">
-                    {link.label}
-                  </a>
-                </li>)}
+              {quickLinks.map((link, index) => {})}
             </ul>
           </div>
 
@@ -121,19 +117,11 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-mountain-snow/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-mountain-snow/60">
-              © 2024 Chata Jindřichov. Všechna práva vyhrazena.
-            </p>
+            <p className="text-sm text-mountain-snow/60">© 2025 Chata Losík. Všechna práva vyhrazena.</p>
             <div className="flex gap-6 text-sm text-mountain-snow/60">
-              <a href="#" className="hover:text-mountain-snow/80 transition-colors">
-                Ochrana osobních údajů
-              </a>
-              <a href="#" className="hover:text-mountain-snow/80 transition-colors">
-                Obchodní podmínky
-              </a>
-              <a href="#" className="hover:text-mountain-snow/80 transition-colors">
-                Kontakt
-              </a>
+              
+              
+              
             </div>
           </div>
         </div>
