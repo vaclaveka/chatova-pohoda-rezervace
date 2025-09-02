@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { 
   Wifi, 
   Car, 
@@ -88,66 +89,102 @@ const AmenitiesSection = () => {
 
         {/* Image Gallery with Details */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {/* Clickable Images */}
-          <a href="/07.JPG" className="block">
-            <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
-              <div className="aspect-video relative overflow-hidden">
-                <img 
-                  src="/07.JPG" 
-                  alt="Pohled na chatu" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-mountain-forest text-base">Venkovní posezení</CardTitle>
-              </CardHeader>
-            </Card>
-          </a>
+          {/* Modal Images */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
+                <div className="aspect-video relative overflow-hidden">
+                  <img 
+                    src="/07.JPG" 
+                    alt="Pohled na chatu" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-mountain-forest text-base">Venkovní posezení</CardTitle>
+                </CardHeader>
+              </Card>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl w-[90vw] p-0 bg-transparent border-0">
+              <img 
+                src="/07.JPG" 
+                alt="Venkovní posezení" 
+                className="w-full h-auto rounded-lg"
+              />
+            </DialogContent>
+          </Dialog>
 
-          <a href="/19.jpg" className="block">
-            <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
-              <div className="aspect-video relative overflow-hidden">
-                <img 
-                  src="/19.jpg" 
-                  alt="Vnitřní prostory" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-mountain-forest text-base">Společenská místnost</CardTitle>
-              </CardHeader>
-            </Card>
-          </a>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
+                <div className="aspect-video relative overflow-hidden">
+                  <img 
+                    src="/19.jpg" 
+                    alt="Vnitřní prostory" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-mountain-forest text-base">Společenská místnost</CardTitle>
+                </CardHeader>
+              </Card>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl w-[90vw] p-0 bg-transparent border-0">
+              <img 
+                src="/19.jpg" 
+                alt="Společenská místnost" 
+                className="w-full h-auto rounded-lg"
+              />
+            </DialogContent>
+          </Dialog>
 
-          <a href="/3.jpg" className="block">
-            <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
-              <div className="aspect-video relative overflow-hidden">
-                <img 
-                  src="/3.jpg" 
-                  alt="Pohled na objekt" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-mountain-forest text-base">Chata</CardTitle>
-              </CardHeader>
-            </Card>
-          </a>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
+                <div className="aspect-video relative overflow-hidden">
+                  <img 
+                    src="/3.jpg" 
+                    alt="Pohled na objekt" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-mountain-forest text-base">Chata</CardTitle>
+                </CardHeader>
+              </Card>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl w-[90vw] p-0 bg-transparent border-0">
+              <img 
+                src="/3.jpg" 
+                alt="Chata" 
+                className="w-full h-auto rounded-lg"
+              />
+            </DialogContent>
+          </Dialog>
 
-          <a href="/IMG_20191013_151234.jpg" className="block">
-            <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
-              <div className="aspect-video relative overflow-hidden">
-                <img 
-                  src="/IMG_20191013_151234.jpg" 
-                  alt="Venkovní prostředí" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-mountain-forest text-base">Pokoje</CardTitle>
-              </CardHeader>
-            </Card>
-          </a>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
+                <div className="aspect-video relative overflow-hidden">
+                  <img 
+                    src="/IMG_20191013_151234.jpg" 
+                    alt="Venkovní prostředí" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-mountain-forest text-base">Pokoje</CardTitle>
+                </CardHeader>
+              </Card>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl w-[90vw] p-0 bg-transparent border-0">
+              <img 
+                src="/IMG_20191013_151234.jpg" 
+                alt="Pokoje" 
+                className="w-full h-auto rounded-lg"
+              />
+            </DialogContent>
+          </Dialog>
         </div>
 
         {/* Additional Amenities */}
