@@ -13,10 +13,6 @@ import {
   Waves,
   Baby
 } from "lucide-react";
-// Images temporarily disabled - add your own images here
-// import interiorImage from "@/assets/interior-common.jpg";
-// import bedroomImage from "@/assets/bedroom.jpg";
-// import outdoorImage from "@/assets/outdoor-facilities.jpg";
 
 const AmenitiesSection = () => {
   const mainFeatures = [
@@ -96,7 +92,7 @@ const AmenitiesSection = () => {
           <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <img 
-                src="/placeholder.svg" 
+                src="/interior-common.jpg" 
                 alt="Interiér společenské místnosti s kuchyní" 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
@@ -115,7 +111,7 @@ const AmenitiesSection = () => {
           <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <img 
-                src="/placeholder.svg" 
+                src="/bedroom.jpg" 
                 alt="Pokoj s lůžky a TV" 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
@@ -134,7 +130,7 @@ const AmenitiesSection = () => {
           <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300">
             <div className="aspect-video relative overflow-hidden">
               <img 
-                src="/placeholder.svg" 
+                src="/outdoor-facilities.jpg" 
                 alt="Venkovní zázemí s hracími prvky" 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
