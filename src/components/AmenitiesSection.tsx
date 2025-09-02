@@ -89,7 +89,7 @@ const AmenitiesSection = () => {
         {/* Image Gallery with Details */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {/* Clickable Images */}
-          <a href="/07.JPG" target="_blank" rel="noopener noreferrer" className="block">
+          <a href="/07.JPG" className="block">
             <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
               <div className="aspect-video relative overflow-hidden">
                 <img 
@@ -99,12 +99,12 @@ const AmenitiesSection = () => {
                 />
               </div>
               <CardHeader>
-                <CardTitle className="text-mountain-forest text-base">Exteriér</CardTitle>
+                <CardTitle className="text-mountain-forest text-base">Venkovní posezení</CardTitle>
               </CardHeader>
             </Card>
           </a>
 
-          <a href="/19.jpg" target="_blank" rel="noopener noreferrer" className="block">
+          <a href="/19.jpg" className="block">
             <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
               <div className="aspect-video relative overflow-hidden">
                 <img 
@@ -114,12 +114,12 @@ const AmenitiesSection = () => {
                 />
               </div>
               <CardHeader>
-                <CardTitle className="text-mountain-forest text-base">Interiér</CardTitle>
+                <CardTitle className="text-mountain-forest text-base">Společenská místnost</CardTitle>
               </CardHeader>
             </Card>
           </a>
 
-          <a href="/3.jpg" target="_blank" rel="noopener noreferrer" className="block">
+          <a href="/3.jpg" className="block">
             <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
               <div className="aspect-video relative overflow-hidden">
                 <img 
@@ -134,7 +134,7 @@ const AmenitiesSection = () => {
             </Card>
           </a>
 
-          <a href="/IMG_20191013_151234.jpg" target="_blank" rel="noopener noreferrer" className="block">
+          <a href="/IMG_20191013_151234.jpg" className="block">
             <Card className="overflow-hidden group hover:shadow-mountain transition-all duration-300 cursor-pointer">
               <div className="aspect-video relative overflow-hidden">
                 <img 
@@ -144,7 +144,7 @@ const AmenitiesSection = () => {
                 />
               </div>
               <CardHeader>
-                <CardTitle className="text-mountain-forest text-base">Okolí chaty</CardTitle>
+                <CardTitle className="text-mountain-forest text-base">Pokoje</CardTitle>
               </CardHeader>
             </Card>
           </a>
