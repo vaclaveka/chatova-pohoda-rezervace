@@ -38,9 +38,7 @@ const Footer = () => {
               <Button variant="ghost" size="icon" className="text-mountain-snow/80 hover:text-mountain-snow hover:bg-mountain-snow/10">
                 <Facebook className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-mountain-snow/80 hover:text-mountain-snow hover:bg-mountain-snow/10">
-                <Instagram className="h-5 w-5" />
-              </Button>
+              
               <Button variant="ghost" size="icon" className="text-mountain-snow/80 hover:text-mountain-snow hover:bg-mountain-snow/10">
                 <MessageCircle className="h-5 w-5" />
               </Button>
@@ -84,7 +82,9 @@ const Footer = () => {
               
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-mountain-snow/60" />
-                <a href="tel:+420123456789" className="text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">+420 724 216 298</a>
+                <a href="tel:+420123456789" className="text-sm text-mountain-snow/80 hover:text-mountain-snow transition-colors">
+                  +420 123 456 789
+                </a>
               </div>
               
               <div className="flex items-center gap-3">
@@ -121,11 +121,19 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-mountain-snow/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-mountain-snow/60">© 2025 Chata Jindřichov. Všechna práva vyhrazena.</p>
+            <p className="text-sm text-mountain-snow/60">
+              © 2024 Chata Jindřichov. Všechna práva vyhrazena.
+            </p>
             <div className="flex gap-6 text-sm text-mountain-snow/60">
-              
-              
-              
+              <a href="#" className="hover:text-mountain-snow/80 transition-colors">
+                Ochrana osobních údajů
+              </a>
+              <a href="#" className="hover:text-mountain-snow/80 transition-colors">
+                Obchodní podmínky
+              </a>
+              <a href="#" className="hover:text-mountain-snow/80 transition-colors">
+                Kontakt
+              </a>
             </div>
           </div>
         </div>
