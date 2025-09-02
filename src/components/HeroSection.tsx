@@ -10,8 +10,11 @@ const HeroSection = () => {
         }} 
       />
       
-      {/* Background Gradient for mobile - smooth blend */}
-      <div className="absolute inset-0 bg-gradient-to-b from-mountain-forest/80 via-transparent to-mountain-earth/60 sm:hidden" />
+      {/* Smooth bottom blend - all devices */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-mountain-earth/90" />
+      
+      {/* Mobile additional overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-mountain-forest/60 via-transparent to-transparent sm:hidden" />
       
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-hero" />
