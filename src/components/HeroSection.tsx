@@ -1,14 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Users, Star, MapPin } from "lucide-react";
-
 const HeroSection = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(/3.jpg)` }}
-      />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(/3.jpg)`
+    }} />
       
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-hero" />
@@ -20,9 +17,7 @@ const HeroSection = () => {
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
             <div className="flex items-center gap-2">
               <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-current" />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-current" />)}
               </div>
               <span className="text-mountain-snow/90">4.9 z 5 hvězd</span>
             </div>
@@ -39,10 +34,7 @@ const HeroSection = () => {
           </h1>
           
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl mb-8 text-mountain-snow/90 max-w-3xl mx-auto leading-relaxed">
-            Prostorný, stylový chalet v klidném prostředí blízko ski areálů, termálních lázní a turistických tras. 
-            Ideální pro větší skupiny v létě i v zimě.
-          </p>
+          <p className="text-xl md:text-2xl mb-8 text-mountain-snow/90 max-w-3xl mx-auto leading-relaxed">Prostorná, stylová chata v klidném prostředí blízko ski areálů, termálních lázní a turistických tras. Ideální pro větší skupiny v létě i v zimě.</p>
 
           {/* Key Features */}
           <div className="flex flex-wrap items-center justify-center gap-6 mb-10 text-mountain-snow/90">
@@ -89,8 +81,6 @@ const HeroSection = () => {
           <div className="w-1 h-3 bg-mountain-snow/50 rounded-full mt-2"></div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
